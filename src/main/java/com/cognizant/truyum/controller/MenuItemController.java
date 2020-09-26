@@ -2,7 +2,6 @@ package com.cognizant.truyum.controller;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,51 +17,48 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cognizant.truyum.model.MenuItem;
+import com.cognizant.truyum.service.AppUserDetailService;
 import com.cognizant.truyum.service.MenuItemService;
 
 @RestController
 @RequestMapping("/menu-items")
 public class MenuItemController {
-	
+
 	@Autowired
 	MenuItemService menuItemService;
 	
 	@Autowired
-	InMemoryUserDetailsManager inMemoryUserDetailsManager;
+	AppUserDetailService userService;
 
-	
 	@GetMapping
 	public ResponseEntity<List<MenuItem>> getAllMenuItems() {
 
-				Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-				String user = authentication.getName();
-				if(!user.equalsIgnoreCase("anonymoususer")){
-					UserDetails userDetails = inMemoryUserDetailsManager.loadUserByUsername(user);
-					String role = userDetails.getAuthorities().toArray()[0].toString();
-					System.out.println("role is "+role);
-					if(role.equals("ROLE_USER"))
-						return new ResponseEntity<List<MenuItem>>(menuItemService.getMenuItemListCustomer(),HttpStatus.OK);
-					else 
-					if(role.equals("ROLE_ADMIN"))
-						return new ResponseEntity<List<MenuItem>>(menuItemService.getMenuItemListAdmin(),HttpStatus.OK);
-				}
-				return new ResponseEntity<List<MenuItem>>(menuItemService.getMenuItemListCustomer(),HttpStatus.OK);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String user = authentication.getName();
+		if (!user.equalsIgnoreCase("anonymoususer")) {
+			UserDetails userDetails = userService.loadUserByUsername(user); 
+			String role = userDetails.getAuthorities().toArray()[0].toString();
+			System.out.println("role is " + role);
+			if (role.equals("ROLE_USER"))
+				return new ResponseEntity<List<MenuItem>>(menuItemService.getMenuItemListCustomer(), HttpStatus.OK);
+			else if (role.equals("ROLE_ADMIN"))
+				return new ResponseEntity<List<MenuItem>>(menuItemService.getMenuItemListAdmin(), HttpStatus.OK);
+		}
+		return new ResponseEntity<List<MenuItem>>(menuItemService.getMenuItemListCustomer(), HttpStatus.OK);
 	}
-	
-	
-	
+
 	@GetMapping("/{id}")
 	public ResponseEntity<MenuItem> getMenuItem(@PathVariable Long id) {
-		
-		return new ResponseEntity<MenuItem>(menuItemService.getMenuItem(id),HttpStatus.OK);
+
+		return new ResponseEntity<MenuItem>(menuItemService.getMenuItem(id), HttpStatus.OK);
 
 	}
-	
+
 	@PutMapping
 	public ResponseEntity<Boolean> modifyMenuItem(@RequestBody MenuItem menuItem) {
-		
-		return new ResponseEntity<Boolean>(menuItemService.modifyMenuItem(menuItem),HttpStatus.OK);
-		
+
+		return new ResponseEntity<Boolean>(menuItemService.modifyMenuItem(menuItem), HttpStatus.OK);
+
 	}
 
 }
