@@ -40,21 +40,23 @@ public class AuthenticationController {
 		String username =  getUser(authHeader);
 		authmap.put("username", username);
 		User user = UserRepository.findByUsername(username);
-		String role = user.getRoles().get(0).getName();
+		// String role = user.getRoles().get(0).getName();
 		String firstname = user.getFirstName();
 		String lastname = user.getLastName();
-		authmap.put("role", role);
+		// authmap.put("role", role);
 		authmap.put("firstname", firstname);
 		authmap.put("lastname", lastname);
 		LOGGER.info("END OF AUTH FUNCTION");
 		return authmap;
 	}
+	
 	private String getUser(String authHeader){
 		String user=new String(Base64.getDecoder().decode(authHeader.substring(6)));
 		user= user.substring(0, user.indexOf(":"));
 		LOGGER.info(user);
 		return user;
 	}
+	
 	private String generateJwt(String user){
 		JwtBuilder builder = Jwts.builder();
         builder.setSubject(user);
