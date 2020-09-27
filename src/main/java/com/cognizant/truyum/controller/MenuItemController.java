@@ -39,9 +39,9 @@ public class MenuItemController {
 			UserDetails userDetails = userService.loadUserByUsername(user); 
 			String role = userDetails.getAuthorities().toArray()[0].toString();
 			System.out.println("role is " + role);
-			if (role.equals("ROLE_USER"))
+			if (role.equals("USER"))
 				return new ResponseEntity<List<MenuItem>>(menuItemService.getMenuItemListCustomer(), HttpStatus.OK);
-			else if (role.equals("ROLE_ADMIN"))
+			else if (role.equals("ADMIN"))
 				return new ResponseEntity<List<MenuItem>>(menuItemService.getMenuItemListAdmin(), HttpStatus.OK);
 		}
 		return new ResponseEntity<List<MenuItem>>(menuItemService.getMenuItemListCustomer(), HttpStatus.OK);
