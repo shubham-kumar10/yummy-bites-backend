@@ -40,5 +40,14 @@ public class MenuItemService {
 		else
 			return false;
 	}
+	
+	public boolean addMenuItem(MenuItem menuItem) {
+		Optional<MenuItem> opMenuItem = menuItemRepository.findById(menuItem.getId());
+		if(!opMenuItem.isPresent()) {
+			menuItemRepository.save(menuItem);
+			return true;
+		}else
+			return false;
+	}
 
 }
