@@ -15,8 +15,4 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	
 	@Query("SELECT u.menuItems from User u WHERE u.username=?1")
 	List<MenuItem> getMenuItems(String username);
-	
-	//TODO
-	@Query("SELECT SUM(m.price) from MenuItem m")
-	double getCartTotal(String username); 
 }

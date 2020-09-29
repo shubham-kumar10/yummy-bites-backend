@@ -1,14 +1,12 @@
 package com.cognizant.truyum.dto;
 
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import com.cognizant.truyum.model.MenuItem;
 
 public class CartDTO {
-	
+
 	private List<MenuItem> cartItems = new ArrayList<MenuItem>();
 
 	private double total;
@@ -17,19 +15,21 @@ public class CartDTO {
 		super();
 	}
 	
+	public CartDTO(List<MenuItem> cartItems, double total) {
+		super();
+		this.cartItems = cartItems;
+		this.total = total;
+	}
+
 
 
 	public List<MenuItem> getCartItems() {
 		return cartItems;
 	}
 
-
-
 	public void setCartItems(List<MenuItem> cartItems) {
 		this.cartItems = cartItems;
 	}
-
-
 
 	public double getTotal() {
 		return total;
@@ -38,8 +38,6 @@ public class CartDTO {
 	public void setTotal(double total) {
 		this.total = total;
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -59,9 +57,4 @@ public class CartDTO {
 			return false;
 		return true;
 	}
-
-	
-
-	
-
 }
