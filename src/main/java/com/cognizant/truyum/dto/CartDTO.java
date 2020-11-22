@@ -1,33 +1,41 @@
 package com.cognizant.truyum.dto;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cognizant.truyum.model.MenuItem;
+import com.cognizant.truyum.model.Item;
 
 public class CartDTO {
 
-	private List<MenuItem> cartItems = new ArrayList<MenuItem>();
-
+	private List<Item> cartItems = new ArrayList<Item>();
+	private Date dateOfPurchase;
 	private double total;
 
 	public CartDTO() {
 		super();
 	}
 	
-	public CartDTO(List<MenuItem> cartItems, double total) {
+	public CartDTO(List<Item> cartItems, double total,Date date) {
 		super();
 		this.cartItems = cartItems;
 		this.total = total;
+		this.dateOfPurchase = date;
 	}
 
-
-
-	public List<MenuItem> getCartItems() {
+	public List<Item> getCartItems() {
 		return cartItems;
 	}
 
-	public void setCartItems(List<MenuItem> cartItems) {
+	public Date getDateOfPurchase() {
+		return dateOfPurchase;
+	}
+
+	public void setDateOfPurchase(Date dateOfPurchase) {
+		this.dateOfPurchase = dateOfPurchase;
+	}
+
+	public void setCartItems(List<Item> cartItems) {
 		this.cartItems = cartItems;
 	}
 

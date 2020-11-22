@@ -1,25 +1,40 @@
 package com.cognizant.truyum.model;
 
+import java.sql.Date;
 import java.util.List;
 
 public class Cart {
 
-	private List<MenuItem> menuItemList;
+	private List<Item> menuItemList;
 	private double total;
+	private Date dateOfPurchase;
 
 	// Constructors
-	public Cart(List<MenuItem> menuItemList, double total) {
+	public Cart(List<Item> menuItemList, double total, Date date) {
 		super();
 		this.menuItemList = menuItemList;
 		this.total = total;
+		this.dateOfPurchase = date;
 	}
 
+	public Date getDateOfPurchase() {
+		return dateOfPurchase;
+	}
+
+
+
+	public void setDateOfPurchase(Date dateOfPurchase) {
+		this.dateOfPurchase = dateOfPurchase;
+	}
+
+
+
 	// Getters and Setters
-	public List<MenuItem> getMenuItemList() {
+	public List<Item> getMenuItemList() {
 		return menuItemList;
 	}
 
-	public void setMenuItemList(List<MenuItem> menuItemList) {
+	public void setMenuItemList(List<Item> menuItemList) {
 		this.menuItemList = menuItemList;
 	}
 

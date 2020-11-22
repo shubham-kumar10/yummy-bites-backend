@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cognizant.truyum.TruyumApplication;
 import com.cognizant.truyum.dto.CartDTO;
+import com.cognizant.truyum.model.Item;
 import com.cognizant.truyum.model.MenuItem;
 import com.cognizant.truyum.service.CartService;
 
@@ -27,11 +29,11 @@ public class CartController {
 	@Autowired
 	CartService cartService;
 
-	@PostMapping("/{userId}/{menuItemId}")
-	public boolean addCartItem(@PathVariable String userId, @PathVariable Long menuItemId) {
+	@PostMapping("/{userId}/{menuItemId}/{qty}")
+	public boolean addCartItem(@PathVariable String userId, @RequestBody Item item) {
 		System.out.println("userid" + userId);
-		System.out.println("menuItemId" + menuItemId);
-		cartService.addCartItem(userId, menuItemId);
+		System.out.println("menuItemId" + item.getItem().getId();
+		cartService.addCartItem(userId, item);
 		return true;
 	}
 

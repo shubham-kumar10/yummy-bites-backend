@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cognizant.truyum.dto.CartDTO;
+import com.cognizant.truyum.model.Item;
 import com.cognizant.truyum.model.MenuItem;
 import com.cognizant.truyum.model.User;
 import com.cognizant.truyum.repository.CartRepository;
@@ -32,10 +33,11 @@ public class CartService {
 	@Autowired
 	CartRepository cartRepository;
 
-	public boolean addCartItem(String username, long menuItemId) {
+	public boolean addCartItem(String username, Item item) {
 		User user = userRepository.findByUsername(username);
-		MenuItem menuItem = menuItemRepository.getOne(menuItemId);
-		user.getMenuItems().add(menuItem);
+		MenuItem menuItem = menuItemRepository.getOne(item.getItem().getId());
+		Cart cart
+		user.getCart().add();
 		userRepository.save(user);
 		return true;
 	}
